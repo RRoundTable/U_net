@@ -20,6 +20,7 @@ https://www.kaggle.com/c/data-science-bowl-2018
 
 ![validation](./result/validation_sample_35.png)
 
+- 작은 feature는 잘 못잡아내고 있다.
 
 # reference
 https://www.kaggle.com/keegil/keras-u-net-starter-lb-0-277
