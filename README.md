@@ -16,6 +16,8 @@ https://www.kaggle.com/c/data-science-bowl-2018
 
 # result
 
+[train](./result/training_sample_300.png)
+[validation](./result/validation_sample_35.png)
 
 
 # reference
