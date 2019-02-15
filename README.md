@@ -18,6 +18,8 @@ https://www.kaggle.com/c/data-science-bowl-2018
 
 ![train](./result/training_sample_300.png)
 
+![validation](./result/validation_sample_15.png)
+
 ![validation](./result/validation_sample_35.png)
 
 - 작은 feature는 잘 못잡아내고 있다.
