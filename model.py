@@ -49,22 +49,22 @@ def U_net(inputs):
 
     c1=Conv2D(16,(3,3), activation="elu", kernel_initializer="he_normal",padding="same")(s)
     c1=Dropout(0.1)(c1)
-    c1=Conv2D(16,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c1)
+    c1=Conv2D(24,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c1)
     p1=MaxPooling2D((2,2))(c1)
 
     c2=Conv2D(32,(3,3), activation="elu", kernel_initializer="he_normal",padding="same")(p1)
     c2=Dropout(0.1)(c2)
-    c2=Conv2D(32,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c2)
+    c2=Conv2D(48,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c2)
     p2=MaxPooling2D((2,2))(c2)
 
     c3=Conv2D(64,(3,3), activation="elu", kernel_initializer="he_normal",padding="same")(p2)
     c3=Dropout(0.1)(c3)
-    c3=Conv2D(64,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c3)
+    c3=Conv2D(96,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c3)
     p3=MaxPooling2D((2,2))(c3)
 
     c4=Conv2D(128,(3,3), activation="elu", kernel_initializer="he_normal",padding="same")(p3)
     c4=Dropout(0.1)(c4)
-    c4=Conv2D(128,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c4)
+    c4=Conv2D(192,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c4)
     p4=MaxPooling2D((2,2))(c4)
 
     c5 = Conv2D(256, (3, 3), activation='elu', kernel_initializer='he_normal', padding='same')(p4)
@@ -125,7 +125,6 @@ def U_net_pyramid(inputs):
 
     c2=Conv2D(32,(3,3), activation="elu", kernel_initializer="he_normal",padding="same")(p1)
     c2=Dropout(0.1)(c2)
-    c2=Conv2D(32,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c2)
     c2_s = Conv2D(16, (3, 3), activation='elu', kernel_initializer="he_normal", padding="same")(c2)
     c2_m = Conv2D(16, (6, 6), activation='elu', kernel_initializer="he_normal", padding="same")(c2)
     c2_l = Conv2D(16, (12, 12), activation='elu', kernel_initializer="he_normal", padding="same")(c2)
@@ -134,7 +133,6 @@ def U_net_pyramid(inputs):
 
     c3=Conv2D(64,(3,3), activation="elu", kernel_initializer="he_normal",padding="same")(p2)
     c3=Dropout(0.1)(c3)
-    c3=Conv2D(64,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c3)
     c3_s = Conv2D(32, (3, 3), activation='elu', kernel_initializer="he_normal", padding="same")(c3)
     c3_m = Conv2D(32, (6, 6), activation='elu', kernel_initializer="he_normal", padding="same")(c3)
     c3_l = Conv2D(32, (12, 12), activation='elu', kernel_initializer="he_normal", padding="same")(c3)
@@ -143,7 +141,6 @@ def U_net_pyramid(inputs):
 
     c4=Conv2D(128,(3,3), activation="elu", kernel_initializer="he_normal",padding="same")(p3)
     c4=Dropout(0.1)(c4)
-    c4=Conv2D(128,(3,3),activation='elu', kernel_initializer="he_normal",padding="same")(c4)
     c4_s = Conv2D(64, (3, 3), activation='elu', kernel_initializer="he_normal", padding="same")(c4)
     c4_m = Conv2D(64, (6, 6), activation='elu', kernel_initializer="he_normal", padding="same")(c4)
     c4_l = Conv2D(64, (12, 12), activation='elu', kernel_initializer="he_normal", padding="same")(c4)

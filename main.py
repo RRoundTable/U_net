@@ -155,13 +155,6 @@ def predict(X_train,X_test,model):
     ax[2].set_title("X_pred")
     plt.savefig("./result/training_sample_{}.png".format(ix))
 
-    # plt.subplot(2,3)
-    # imshow(X_train[ix])
-    # plt.savefig("./result/X_train_{}.png".format(ix))
-    # imshow(np.squeeze(Y_train[ix]))
-    # plt.savefig("./result/Y_train_{}.png".format(ix))
-    # imshow(np.squeeze(preds_train_t[ix]))
-    # plt.savefig("./result/preds_train_t{}.png".format(ix))
 
     # Perform a sanity check on some random validation samples
     ix = random.randint(0, len(preds_val_t))
@@ -179,12 +172,6 @@ def predict(X_train,X_test,model):
     ax[2].set_title("X_val_pred")
     plt.savefig("./result/validation_sample_{}.png".format(ix))
 
-    # imshow(X_train[int(X_train.shape[0] * 0.9):][ix])
-    # plt.savefig("./result/X_train_val_{}.png".format(ix))
-    # imshow(np.squeeze(Y_train[int(Y_train.shape[0] * 0.9):][ix]))
-    # plt.savefig("./result/Y_train_val_{}.png".format(ix))
-    # imshow(np.squeeze(preds_val_t[ix])) # error
-    # plt.savefig("./result/preds_val_t{}.png".format(ix))
 if __name__=="__main__":
     args=parser.parse_args()
     if args.version =="predict": # prediction
