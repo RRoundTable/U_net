@@ -39,8 +39,8 @@ https://www.kaggle.com/c/data-science-bowl-2018
 - 작은 feature는 잘 못잡아내고 있다.
 
 ## U_net + pyramid
-
-![pyramid]()
+아래의 이미지는 작은 feature를 상대적으로 잘 잡아내고 있다.
+![pyramid](./result/validation_sample_35_pyramid.png)
 
 # reference
 https://www.kaggle.com/keegil/keras-u-net-starter-lb-0-277
