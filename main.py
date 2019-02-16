@@ -16,7 +16,7 @@ from skimage.morphology import label
 
 
 #
-from model import U_net
+from model import U_net,U_net_pyramid
 from model import mean_iou
 from tensorflow.python.keras.models import load_model
 from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
@@ -33,6 +33,8 @@ parser = argparse.ArgumentParser(description='U-net for semantic segmentation')
 
 parser.add_argument('--version', default="predict", type=str,
                     help='train OR predict')
+parser.add_argument('--model', default="base", type=str,
+                    help='base OR pyramid')
 
 
 
@@ -91,19 +93,29 @@ for n, id_ in tqdm(enumerate(test_ids), total=len(test_ids)):
 
 print('Done!')
 
-def train():
-    model=U_net(np.array(X_train))
+def train(model):
+    if model=='base':
+        print("base model training ...")
+        model=U_net(np.array(X_train))
+        checkpointer = ModelCheckpoint('model-dsbowl2018-1.h5', verbose=1, save_best_only=True)
+    else :
+        print("pyramid model training ...")
+        model=U_net_pyramid(np.array(X_train))
+        checkpointer = ModelCheckpoint('model-dsbowl2018-1_pyramid.h5', verbose=1, save_best_only=True)
 
     earlystopper = EarlyStopping(patience=5, verbose=1)
-    checkpointer = ModelCheckpoint('model-dsbowl2018-1.h5', verbose=1, save_best_only=True)
     model.fit(X_train, Y_train, validation_split=0.1, batch_size=16, epochs=50,
                         callbacks=[earlystopper, checkpointer])
 
 
 
-def predict(X_train,X_test):
-
-    model=load_model('model-dsbowl2018-1.h5', custom_objects={'mean_iou': mean_iou})
+def predict(X_train,X_test,model):
+    if model=='base':
+        print("base model load ...")
+        model=load_model('model-dsbowl2018-1.h5', custom_objects={'mean_iou': mean_iou})
+    else :
+        print("pyramid model load ...")
+        model = load_model('model-dsbowl2018-1_pyramid.h5', custom_objects={'mean_iou': mean_iou})
     preds_train=model.predict(X_train[:int(X_train.shape[0]*0.9)], verbose=1)
     preds_val=model.predict(X_train[int(X_train.shape[0]*0.9):], verbose=1)
     preds_test=model.predict(X_test, verbose=1)
@@ -153,6 +165,7 @@ def predict(X_train,X_test):
 
     # Perform a sanity check on some random validation samples
     ix = random.randint(0, len(preds_val_t))
+    ix=35
     fig=plt.figure()
     ax=[]
     for i in range(3):
@@ -175,6 +188,6 @@ def predict(X_train,X_test):
 if __name__=="__main__":
     args=parser.parse_args()
     if args.version =="predict": # prediction
-        predict(X_train,X_test)
+        predict(X_train,X_test,args.model)
     else :
-        train()
+        train(args.model)
